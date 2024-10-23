@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{userRecommendation.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{userRecommendation.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/userRecommendations/add}" class="btn btn-primary ms-2">[[#{userRecommendation.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${userRecommendations.empty}">[[#{userRecommendation.list.empty}]]</div>
+            <div th:if="${!userRecommendations.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{userRecommendation.recommendationId.label}]]</th>
+                            <th scope="col">[[#{userRecommendation.recommendedUseCaseId.label}]]</th>
+                            <th scope="col">[[#{userRecommendation.useCaseId.label}]]</th>
+                            <th scope="col">[[#{userRecommendation.useCase.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="userRecommendation : ${userRecommendations}">
+                            <td>[[${userRecommendation.recommendationId}]]</td>
+                            <td>[[${userRecommendation.recommendedUseCaseId}]]</td>
+                            <td>[[${userRecommendation.useCaseId}]]</td>
+                            <td>[[${userRecommendation.useCase}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/userRecommendations/edit/{recommendationId}(recommendationId=${userRecommendation.recommendationId})}" class="btn btn-sm btn-secondary">[[#{userRecommendation.list.edit}]]</a>
+                                    <form th:action="@{/userRecommendations/delete/{recommendationId}(recommendationId=${userRecommendation.recommendationId})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{userRecommendation.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

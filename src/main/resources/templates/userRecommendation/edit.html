@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{userRecommendation.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{userRecommendation.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/userRecommendations}" class="btn btn-secondary">[[#{userRecommendation.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('userRecommendation')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='userRecommendation', field='recommendationId', disabled=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='userRecommendation', field='recommendedUseCaseId', type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='userRecommendation', field='useCaseId', type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='userRecommendation', field='useCase', type='select')}" />
+                <input type="submit" th:value="#{userRecommendation.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>
