@@ -1,43 +1,45 @@
-# UsecaseApp
+# BI4Tourism - Spring REST API
 
-This app was created with Bootify.io - tips on working with the code [can be found here](https://bootify.io/next-steps/).
+**BI4Tourism** is a Spring-based REST API designed to streamline and enhance tourism data analysis workflows. This backend application provides endpoints to save user-defined use cases, capturing essential analytics components such as dimensions, measures, time dimensions, and filters. Additionally, it tracks and records user actions for improved insights into user behavior and preferences.
 
-## Development
+---
 
-Update your local database connection in `application.yml` or create your own `application-local.yml` file to override
-settings for development.
+## Features
 
-During development it is recommended to use the profile `local`. In IntelliJ `-Dspring.profiles.active=local` can be
-added in the VM options of the Run Configuration after enabling this property in "Modify options".
+### Core Functionalities
 
-After starting the application it is accessible under `localhost:8080`.
+1. **Save User Use Cases**  
+   - Users can define and save their specific analytics use cases.  
+   - Each use case can include:
+     - **Dimensions**: Key attributes for data slicing (e.g., region, activity type).
+     - **Measures**: Metrics for analysis (e.g., revenue, visitor count).
+     - **Time Dimensions**: Temporal aspects of the data (e.g., year, quarter, month).
+     - **Filters**: Conditions to narrow down the dataset (e.g., "country = USA" or "year > 2020").
 
-## Build
+2. **Track User Actions**  
+   - Capture and save user interactions with the app.  
+   - Recorded actions can include:
+     - Query submissions.
+     - Report generation.
+     - Data exploration paths.
+   - Useful for analytics, audit trails, and improving the user experience.
 
-The application can be built using the following command:
+---
 
-```
-mvnw clean package
-```
+## API Endpoints
 
-Start your application with the following command - here with the profile `production`:
-
-```
-java -Dspring.profiles.active=production -jar ./target/usecase-app-0.0.1-SNAPSHOT.jar
-```
-
-If required, a Docker image can be created with the Spring Boot plugin. Add `SPRING_PROFILES_ACTIVE=production` as
-environment variable when running the container.
-
-```
-mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=io.bootify/usecase-app
-```
-
-## Further readings
-
-* [Maven docs](https://maven.apache.org/guides/index.html)  
-* [Spring Boot reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)  
-* [Spring Data JPA reference](https://docs.spring.io/spring-data/jpa/reference/jpa.html)
-* [Thymeleaf docs](https://www.thymeleaf.org/documentation.html)  
-* [Bootstrap docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/)  
-* [Learn Spring Boot with Thymeleaf](https://www.wimdeblauwe.com/books/taming-thymeleaf/)  
+### Use Case Management
+- **POST /api/usecases**  
+  Save a user-defined use case including dimensions, measures, time dimensions, and filters.  
+  **Request Body Example**:
+  ```json
+  {
+    "name": "Top Destinations Analysis",
+    "dimensions": ["Region", "Tour Type"],
+    "measures": ["Revenue", "Visitors"],
+    "timeDimensions": ["Year", "Month"],
+    "filters": {
+      "country": "USA",
+      "year": { "operator": ">", "value": 2020 }
+    }
+  }
