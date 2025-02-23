@@ -1,0 +1,2 @@
+use_case_filter_id,filter_operation,filter_value,dimension_id,use_case_id
+10003,eq,hotel,10004,10003

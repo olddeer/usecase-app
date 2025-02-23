@@ -1,0 +1,4 @@
+dimension_id,dimension_name,dimension_title
+10005,Attractions.categoryname,Attractions Categoryname
+10004,Attractions.categoryname,Attractions Categoryname
+10006,AttractionsReviews.reviewsPublishedatdate,Attractions Reviews Reviews.publishedatdate
